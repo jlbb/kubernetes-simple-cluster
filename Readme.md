@@ -27,8 +27,16 @@ The most common operations can be done with the following `kubectl` commands:
 `kubectl exec <pod_name> <command>` - execute a command on a container in a pod
 
 Example to scale up a Deployment resource:
-
 `kubectl scale deployments/kubernetes-bootcamp --replicas=4`
 
 For more info about these commands and learn some basics: https://kubernetes.io/docs/tutorials/kubernetes-basics/
 Getting started with Kubernetes guide: https://theithollow.com/2019/01/26/getting-started-with-kubernetes/
+
+# Tutorial
+
+- Step 1:
+  Create a manifest to start understanding Pods (https://theithollow.com/2019/01/21/kubernetes-pods/)
+  https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  Deploy kubernet: `kubectl apply -f kube-manifest.yaml`
+  `kubectl get pods`
+  `kubectl describe pod [pod name]`
