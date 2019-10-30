@@ -32,11 +32,26 @@ Example to scale up a Deployment resource:
 For more info about these commands and learn some basics: https://kubernetes.io/docs/tutorials/kubernetes-basics/
 Getting started with Kubernetes guide: https://theithollow.com/2019/01/26/getting-started-with-kubernetes/
 
+# Kubectl cheatsheet
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
 # Tutorial
 
 - Step 1:
   Create a manifest to start understanding Pods (https://theithollow.com/2019/01/21/kubernetes-pods/)
   https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-  Deploy kubernet: `kubectl apply -f kube-manifest.yaml`
+
+  Deploy kubernete: `kubectl apply -f kube-manifest.yaml`
+  Delete kubernete resource: `kubectl apply -f kube-manifest.yaml`
+
   `kubectl get pods`
-  `kubectl describe pod [pod name]`
+  `kubectl describe pod [pod name]` or `kubectl get pods [pod-name] -o yaml` to get the ouput in yaml format
+
+- Step 2:
+  Deploy a replica Set for replicating Pods (https://theithollow.com/2019/01/28/kubernetes-replica-sets/)
+  https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+
+  `kubectl delete po [pod name] &`
+
+  Run `kubectl get pods` to see the state of replicating during the POD deleting
