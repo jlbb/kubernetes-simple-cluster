@@ -1,0 +1,16 @@
+{
+  "name": "kubernetes-simple-cluster",
+  "version": "1.0.0",
+  "description": "Kubernetes basics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kubernetes",
+    "docker",
+    "docker-for-desktop"
+  ],
+  "author": "",
+  "license": "MIT"
+}
