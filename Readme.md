@@ -36,22 +36,36 @@ Getting started with Kubernetes guide: https://theithollow.com/2019/01/26/gettin
 
 https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
+# kubectl commands
+
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
 # Tutorial
 
 - Step 1:
-  Create a manifest to start understanding Pods (https://theithollow.com/2019/01/21/kubernetes-pods/)
-  https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  Create a manifest to start understanding Pods as a single unit (https://theithollow.com/2019/01/21/kubernetes-pods/)
+  POD docs: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 
   Deploy kubernete: `kubectl apply -f kube-manifest.yaml`
-  Delete kubernete resource: `kubectl apply -f kube-manifest.yaml`
+  Delete kubernete resource: `kubectl delete -f kube-manifest.yaml`
 
   `kubectl get pods`
   `kubectl describe pod [pod name]` or `kubectl get pods [pod-name] -o yaml` to get the ouput in yaml format
 
 - Step 2:
   Deploy a replica Set for replicating Pods (https://theithollow.com/2019/01/28/kubernetes-replica-sets/)
-  https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+  Replica set docs: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 
   `kubectl delete po [pod name] &`
 
   Run `kubectl get pods` to see the state of replicating during the POD deleting
+
+- Step 3:
+  Deployment object construct a level above replica sets and actually manage the replica set objects (https://theithollow.com/2019/01/30/kubernetes-deployments/)
+  Deployment docs: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
+  Deploy update on deployment object: `kubectl apply -f kube-update-deployment.yaml`
+
+  `kubectl get po; kubectl get deploy`
+
+  For larger updates better keep tracking with `kubectl rollout status deployment [deployment name]`
