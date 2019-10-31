@@ -34,3 +34,25 @@ spec: #specifications for our object
       protocol: TCP
   selector: #Label selector used to identify pods
     app: nginx
+
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "external-web"
+spec:
+  ports:
+    - name: "remote-nginx"
+      protocol: "TCP"
+      port: 80
+      targetPort: 80
+---
+kind: "Endpoints"
+apiVersion: "v1"
+metadata:
+  name: "external-web"
+subsets:
+  - addresses:
+      - ip: "142.93.131.124" #The IP Address of the external web server
+    ports:
+      - port: 80
+        name: "remote-nginx"
