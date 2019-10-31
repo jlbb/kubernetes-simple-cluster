@@ -42,7 +42,7 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 
 # Tutorial
 
-- Step 1:
+- PODS - Step 1:
   Create a manifest to start understanding Pods as a single unit (https://theithollow.com/2019/01/21/kubernetes-pods/)
   POD docs: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 
@@ -52,7 +52,7 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
   `kubectl get pods`
   `kubectl describe pod [pod name]` or `kubectl get pods [pod-name] -o yaml` to get the ouput in yaml format
 
-- Step 2:
+- Deployment - Step 2:
   Deploy a replica Set for replicating Pods (https://theithollow.com/2019/01/28/kubernetes-replica-sets/)
   Replica set docs: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 
@@ -60,7 +60,7 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 
   Run `kubectl get pods` to see the state of replicating during the POD deleting
 
-- Step 3:
+- Replica Set - Step 3:
   Deployment object construct a level above replica sets and actually manage the replica set objects (https://theithollow.com/2019/01/30/kubernetes-deployments/)
   Deployment docs: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 
@@ -69,3 +69,13 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
   `kubectl get po; kubectl get deploy`
 
   For larger updates better keep tracking with `kubectl rollout status deployment [deployment name]`
+
+  We can remove the update running `kubectl delete -f kube-update-deployment.yaml`
+
+- Services and Labels - Step 4:
+  Deploy Service object to front-endi 2 pots (https://theithollow.com/2019/01/31/kubernetes-services-and-labels/)
+  Services docs: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+
+  `kubectl get services`
+
+   Given the declaration that `nodePort: 30001` we can access our nginx server at http://localhost:30001

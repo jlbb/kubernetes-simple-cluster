@@ -5,7 +5,7 @@ metadata: #information about our object we're deploying
   labels: #A tag on the deployments created
     app: nginx
 spec: #specifications for our object
-  replicas: 3 #The number of pods that should always be running
+  replicas: 2 #The number of pods that should always be running
   selector: #which pods the replica set should be responsible for
     matchLabels:
       app: nginx #any pods with labels matching this I'm responsible for.
@@ -19,3 +19,18 @@ spec: #specifications for our object
           image: nginx #which container image should be pulled
           ports:
             - containerPort: 80 #the port of the container within the pod
+---
+apiVersion: v1 #version of the API to use
+kind: Service #What kind of object we're deploying
+metadata: #information about our object we're deploying
+  name: ingress-nginx #Name of the service
+spec: #specifications for our object
+  type: NodePort #Ignore for now discussed in a future post
+  ports: #Ignore for now discussed in a future post
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30001
+      protocol: TCP
+  selector: #Label selector used to identify pods
+    app: nginx
