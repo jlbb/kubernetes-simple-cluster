@@ -5,6 +5,7 @@ Tutorial to get started with some `kubectl` commands and a `kube-manifest.yaml` 
 # Kubernetes
 
 - Deploy a new Docker stack (default orchestrator is Kubernetes): `docker stack deploy -c docker-compose.yaml nginx`
+
 - Stop stack `docker stack rm nginx`
 
 - Kubernetes version: `kubectl version`
@@ -35,6 +36,10 @@ Tutorial to get started with some `kubectl` commands and a `kube-manifest.yaml` 
 
   `kubectl exec <pod_name> <command>` - execute a command on a container in a pod
 
+- Apply filter to kubectl to sort by (e.g. get Replica Sets sorted by creation date):
+
+  `kubectl get rs --sort-by=.metadata.creationTimestamp`
+
 - Example to scale up a Deployment resource:
 
   `kubectl scale deployments/kubernetes-bootcamp --replicas=4`
@@ -52,29 +57,35 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 
 # Tutorial
 
-- PODS - Step 1:
+- Pods - Step 1:
   Create a manifest to start understanding Pods as a single unit (https://theithollow.com/2019/01/21/kubernetes-pods/)
 
-  POD docs: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  Pod docs: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 
   - Deploy kubernete: `kubectl apply -f kube-manifest.yaml`
 
   - Delete kubernete resource: `kubectl delete -f kube-manifest.yaml`
 
-  `kubectl get pods`
+  `kubectl get pods` or `kubectl get pods --show-labels` to show the Pods' labels
 
   `kubectl describe pod [pod name]` or `kubectl get pods [pod-name] -o yaml` to get the ouput in yaml format
 
-- Deployment - Step 2:
+  - Notes:
+
+    - You can only horizontally scale stateless Pods. If you have stateful Pods (horizontal) scaling up/down is not possible
+
+    - To create stateless apps check 12factor app (https://12factor.net/)
+
+- Replica Set - Step 2:
   Deploy a Replica Set for replicating Pods (https://theithollow.com/2019/01/28/kubernetes-replica-sets/)
 
   Replica set docs: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 
   `kubectl delete po [pod name] &`
 
-  Run `kubectl get pods` to see the state of replicating during the POD deleting
+  Run `kubectl get pods` to see the state of replicating during the Pod deleting
 
-- Replica Set - Step 3:
+- Deployments - Step 3:
   Deployment object construct a level above replica sets and actually manage the replica set objects (https://theithollow.com/2019/01/30/kubernetes-deployments/)
 
   Deployment docs: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
@@ -84,6 +95,12 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
   `kubectl get po; kubectl get deploy`
 
   For larger updates better keep tracking with `kubectl rollout status deployment [deployment name]`
+
+  Update image container of the deployment object (e.g. Update nginx image to nginx:1.15.1-alpine version):
+
+  `kubectl set image deployment [deployment name] nginx=nginx:1.15.1-alpine`
+
+  See rollout history status: `kubectl rollout history deployment [deployment name]`
 
   We can remove the update running `kubectl delete -f kube-update-deployment.yaml`
 
